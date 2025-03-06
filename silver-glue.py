@@ -2,8 +2,24 @@ import sys
 import boto3
 import pandas as pd
 from datetime import datetime
+"""
 
-class GlueBronze:
+ File "/tmp/glue-python-scripts-AEOZ/glue-job-registers-copy.py", line 96, in main
+AttributeError: 'GlueSilver' object has no attribute 'download_from_s3'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/tmp/runscript.py", line 215, in <module>
+    handle_errors()
+  File "/tmp/runscript.py", line 38, in handle_errors
+    raise e_type(e_value).with_traceback(new_stack)
+  File "/tmp/glue-python-scripts-AEOZ/glue-job-registers-copy.py", line 138, in <module>
+  File "/tmp/glue-python-scripts-AEOZ/glue-job-registers-copy.py", line 96, in main
+AttributeError: 'GlueSilver' object has no attribute 'download_from_s3'
+
+"""
+class GlueSilver:
     def __init__(self, bucket_name, folder_table):
         self.s3_client = boto3.client("s3")
         
@@ -93,7 +109,7 @@ class GlueBronze:
 
 
     def main(self):
-        if not self.download_from_s3():
+        if not self.download_from_bronze_s3():
             return "Parquet file was not possible to load."
 
         try:
@@ -109,11 +125,11 @@ class GlueBronze:
 
         # Define Bronze file name and path
         
-        silver_file_name = f"silver_{self.folder_table}_{self.today_str}.parquet"
-        silver_s3_path = f"silver/{self.folder_table}/{self.today_str}/{silver_file_name}"
+        #silver_file_name = f"silver_{self.folder_table}_{self.today_str}.parquet"
+        silver_s3_path = f"silver/{self.folder_table}/{self.today_str}/silver_file.parquet"
 
         # Save as Parquet
-        silver_local_path = f"/tmp/silver/{silver_file_name}"
+        silver_local_path = f"/tmp/silver/silver_file.parquet"
         df_final.to_parquet(silver_local_path, index=False)
 
         # Upload to S3
@@ -134,6 +150,6 @@ if __name__ == "__main__":
         print("Missing required parameters!")
         sys.exit(1)
 
-    bronze_pipeline = GlueBronze(bucket_name, folder_table)
-    result = bronze_pipeline.main()
+    glue_pipeline = GlueSilver(bucket_name, folder_table)
+    result = glue_pipeline.main()
     print(result)
