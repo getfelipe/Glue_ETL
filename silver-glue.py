@@ -2,23 +2,7 @@ import sys
 import boto3
 import pandas as pd
 from datetime import datetime
-"""
 
- File "/tmp/glue-python-scripts-AEOZ/glue-job-registers-copy.py", line 96, in main
-AttributeError: 'GlueSilver' object has no attribute 'download_from_s3'
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/tmp/runscript.py", line 215, in <module>
-    handle_errors()
-  File "/tmp/runscript.py", line 38, in handle_errors
-    raise e_type(e_value).with_traceback(new_stack)
-  File "/tmp/glue-python-scripts-AEOZ/glue-job-registers-copy.py", line 138, in <module>
-  File "/tmp/glue-python-scripts-AEOZ/glue-job-registers-copy.py", line 96, in main
-AttributeError: 'GlueSilver' object has no attribute 'download_from_s3'
-
-"""
 class GlueSilver:
     def __init__(self, bucket_name, folder_table):
         self.s3_client = boto3.client("s3")
@@ -26,6 +10,8 @@ class GlueSilver:
         self.bucket_name = bucket_name
         self.folder_table = folder_table
         self.today_str = datetime.today().strftime("%d%m%Y")
+
+        self.path_file = f"bronze/registers/{self.today_str}/bronze_file.parquet"
         
          # Temporary file path
         
@@ -53,7 +39,7 @@ class GlueSilver:
         except Exception as e:
             print(f"Error uploading file: {e}")
 
-    def data_transformation(df):
+    def data_transformation(self, df):
         try:
             # Remove duplicates based on cpf, email, and id (equivalent to ROW_NUMBER() OVER PARTITION BY)
             df['n_cpf'] = df.groupby('cpf').cumcount() + 1
