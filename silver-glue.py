@@ -14,15 +14,25 @@ class GlueSilver:
         self.path_file = f"bronze/registers/{self.today_str}/bronze_file.parquet"
         
          # Temporary file path
-        
+        self.tmp_silver_file = f"/tmp/bronze_file.parquet"
+
+
+
     def download_from_bronze_s3(self):
         """Downloads file from bronze S3 to a local temporary file"""
         try:
-            response = self.s3_client.list_objects_v2(Bucket=self.bucket_name, Prefix=f"bronze/{self.folder_table}/{self.today_str}")
-            path_bronze_file = response.get("Contents")[0].get("Key")
+            response = self.s3_client.list_objects_v2(Bucket=self.bucket_name, Prefix=f"bronze/registers/{self.today_str}")
+            contents = response.get("Contents")
+
+            if not contents:
+                print("No files found in the specified S3 location.")
+                return False
+
+
+            path_bronze_file = contents[0].get("Key")
             bronze_file = path_bronze_file.split("/")[-1]
 
-            self.tmp_silver_file = f"/tmp/silver/{bronze_file}"
+            
             self.s3_client.download_file(self.bucket_name, self.path_file, self.tmp_silver_file)
  
             return True
@@ -115,7 +125,7 @@ class GlueSilver:
         silver_s3_path = f"silver/{self.folder_table}/{self.today_str}/silver_file.parquet"
 
         # Save as Parquet
-        silver_local_path = f"/tmp/silver/silver_file.parquet"
+        silver_local_path = f"/tmp/silver_file"
         df_final.to_parquet(silver_local_path, index=False)
 
         # Upload to S3
