@@ -4,14 +4,15 @@ import pandas as pd
 from datetime import datetime
 
 class GlueSilver:
-    def __init__(self, bucket_name, folder_table):
+    def __init__(self, bucket_name):
         self.s3_client = boto3.client("s3")
         
+        self.table = "registers"
         self.bucket_name = bucket_name
-        self.folder_table = folder_table
+        #self.folder_table = folder_table
         self.today_str = datetime.today().strftime("%d%m%Y")
 
-        self.path_file = f"bronze/registers/{self.today_str}/bronze_file.parquet"
+        self.path_file = f"bronze/{self.table}/{self.today_str}/bronze_file.parquet"
         
          # Temporary file path
         self.tmp_silver_file = f"/tmp/bronze_file.parquet"
@@ -21,7 +22,7 @@ class GlueSilver:
     def download_from_bronze_s3(self):
         """Downloads file from bronze S3 to a local temporary file"""
         try:
-            response = self.s3_client.list_objects_v2(Bucket=self.bucket_name, Prefix=f"bronze/registers/{self.today_str}")
+            response = self.s3_client.list_objects_v2(Bucket=self.bucket_name, Prefix=f"bronze/{self.table}/{self.today_str}")
             contents = response.get("Contents")
 
             if not contents:
@@ -29,8 +30,8 @@ class GlueSilver:
                 return False
 
 
-            path_bronze_file = contents[0].get("Key")
-            bronze_file = path_bronze_file.split("/")[-1]
+            #path_bronze_file = contents[0].get("Key")
+            #bronze_file = path_bronze_file.split("/")[-1]
 
             
             self.s3_client.download_file(self.bucket_name, self.path_file, self.tmp_silver_file)
@@ -122,10 +123,10 @@ class GlueSilver:
         # Define Bronze file name and path
         
         #silver_file_name = f"silver_{self.folder_table}_{self.today_str}.parquet"
-        silver_s3_path = f"silver/{self.folder_table}/{self.today_str}/silver_file.parquet"
+        silver_s3_path = f"silver/{self.table}/{self.today_str}/silver_file.parquet"
 
         # Save as Parquet
-        silver_local_path = f"/tmp/silver_file"
+        silver_local_path = f"/tmp/silver_file.parquet"
         df_final.to_parquet(silver_local_path, index=False)
 
         # Upload to S3
@@ -140,12 +141,12 @@ if __name__ == "__main__":
         params[args[i]] = args[i + 1]
         
     bucket_name = params.get("--bucket_name")
-    folder_table = params.get("--folder_table")
+    #folder_table = params.get("--folder_table")
 
-    if None in [bucket_name, folder_table]:
+    if None in [bucket_name]:
         print("Missing required parameters!")
         sys.exit(1)
 
-    glue_pipeline = GlueSilver(bucket_name, folder_table)
+    glue_pipeline = GlueSilver(bucket_name)
     result = glue_pipeline.main()
     print(result)

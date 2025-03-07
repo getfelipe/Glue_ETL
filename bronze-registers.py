@@ -68,7 +68,7 @@ if __name__ == "__main__":
 
     # Validação: garantir que todos os parâmetros estão presentes
     if not all([bucket_name, path_file]):
-        print("Erro: Parâmetros obrigatórios ausentes!")
+        print("🚨 Erro: Parâmetros obrigatórios ausentes!")
         sys.exit(1)
 
     # Executa o pipeline
