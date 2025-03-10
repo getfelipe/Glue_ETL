@@ -57,7 +57,7 @@ Check out the result below
 
 ## For more details on configuration, read my Medium post:
 
-Check out my Medium post: [Title](https://medium.com/)
+Check out my Medium post: [AWS Glue, Athena, and Grafana: A Step-by-Step Guide to a Simple Data Pipeline](https://medium.com/)
 
 ## Packages Used
 
