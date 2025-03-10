@@ -1,6 +1,6 @@
 [![Author: Felipe](https://img.shields.io/badge/Author-Felipe%20Machado-blue?style=flat-square)](https://www.linkedin.com/in/getfelipe/) [![Python 3.12](https://img.shields.io/badge/Python-3.12-blue?style=flat-square&logo=python)](https://www.python.org/downloads/release/python-3120/)
 
-[![Read on Medium](https://img.shields.io/badge/Read%20on-Medium-black?style=flat-square&logo=medium)](https://medium.com/)
+[![Read on Medium](https://img.shields.io/badge/Read%20on-Medium-black?style=flat-square&logo=medium)](https://medium.com/@getfelipe/aws-glue-athena-and-grafana-a-step-by-step-guide-to-a-simple-data-pipeline-2280fdc41326)
 
 # AWS Glue, Athena, and Grafana: A Step-by-Step Guide to a Simple Data Pipeline
 
@@ -75,4 +75,4 @@ Check out the result below.
 
 ## For more details on configuration, read my Medium post:
 
-Check out my Medium post: [AWS Glue, Athena, and Grafana: A Step-by-Step Guide to a Simple Data Pipeline](https://medium.com/)
+Check out my Medium post: [AWS Glue, Athena, and Grafana: A Step-by-Step Guide to a Simple Data Pipeline](https://medium.com/@getfelipe/aws-glue-athena-and-grafana-a-step-by-step-guide-to-a-simple-data-pipeline-2280fdc41326)
