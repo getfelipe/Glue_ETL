@@ -60,6 +60,8 @@ Check out the result below.
 ```
 |---> models     (Contains the bronze and silver transformation in Glue)
 |---> files   (Contains a sample file uploaded in S3 to trigger the Lambda)
+ |--> orders (Order data)
+ |--> registers (Registration data)
 |---> assets    (Images)
 |---> lambda.py  (Lambda code to start the workflow)
 ```
