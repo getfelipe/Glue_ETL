@@ -22,13 +22,13 @@ The fake data used consists of "Registers" and "Orders" that follows the structu
 | `country`           | `voucher`        |
 | `city`              | `order_status`   |
 | `state`             | `order_date`     |
-| `address_street`    |                  |
-| `address_number`    |                  |
-| `gender`            |                  |
-| `marital_status`    |                  |
-| `phone`             |                  |
-| `email`             |                  |
-| `register_date`     |                  |
+| `address_street`    |
+| `address_number`    |
+| `gender`            |
+| `marital_status`    |
+| `phone`             |
+| `email`             |
+| `register_date`     |
 
 ### Transformation Architecture
 
