@@ -4,7 +4,7 @@
 
 # AWS Glue, Athena, and Grafana: A Step-by-Step Guide to a Simple Data Pipeline
 
-The goal of this project is to build an simple pipeline using with AWS Glue, Athena and Grafana. The architecture that I built it is shown below:
+The goal of this project is to build a simple pipeline using AWS Glue, Athena, and Grafana. The architecture that I built is shown below:
 
 ![etl-architecture](assets/finalGlue.png)
 
@@ -37,21 +37,21 @@ The transformation process follows the Medallion Architecture and is organized i
 - **Raw:** Contains the files in the S3 bucket.
 - **Bronze:** Contains raw data uploaded to another bucket by Glue Job
 - **Silver:** Applies transformations such as casting, removing duplicates, and using CASE statements to derive regional information.
-- **Gold:** Contains the final metrics that will be used direct on the Dashboard
+- **Gold:** Contains the final metrics that will be used directly on the dashboard.
 
 ### ETL on Glue
 
-This part consist of creating the Workflow that lambda will activate when a file is uploaded in the bucket.
-Then, it will call the orders workflow to load the files in another bucket, convert them into parquet and creating the date structure of folders for organizing as well as for registers workflow. Lastly, the gold is only used with the queries in Athena and Grafana to produce the business metric. Check it out the workflow below:
+This part consists of creating the workflow that Lambda will activate when a file is uploaded in the bucket.
+Then, it will call the orders workflow to load the files in another bucket, convert them into Parquet, and create the date structure of folders for organizing as well as for the registers workflow. Lastly, the gold is only used with the queries in Athena and Grafana to produce the business metric. Check out the workflow below:
 
 ![etl-glue](assets/etl-glue.png)
 
-This is the Order ETL, the glue-job-orders is the bronze process whereas the glue-job-orders-copy is about silver process. Basically, the same happens to another registers workflow.
+This is the Order ETL; the glue-job-orders is the bronze process, whereas the glue-job-orders-copy is about the silver process. Basically, the same happens to another register's workflow.
 
 ### Visualization
 
-After the configuration of Athena for connecting the Silver bucket to database I am be able to connect Athena with Grafana to build the dashboard: the focus is on producing charts and insights by region—such as canceled orders, total orders, and order status.
-Check out the result below
+After the configuration of Athena for connecting the Silver bucket to the database, I will be able to connect Athena with Grafana to build the dashboard: the focus is on producing charts and insights by region—such as canceled orders, total orders, and order status.
+Check out the result below.
 
 ![grafana-dashboard](assets/finaldash.png)
 
