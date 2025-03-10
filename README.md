@@ -64,13 +64,13 @@ Check out the result below
 |---> lambda.py  (Lambda code to start the workflow)
 ```
 
-## For more details on configuration, read my Medium post:
-
-Check out my Medium post: [AWS Glue, Athena, and Grafana: A Step-by-Step Guide to a Simple Data Pipeline](https://medium.com/)
-
 ## Packages Used
 
 - **boto3**
 - **pandas**
 - **datetime**
 - **sys**
+
+## For more details on configuration, read my Medium post:
+
+Check out my Medium post: [AWS Glue, Athena, and Grafana: A Step-by-Step Guide to a Simple Data Pipeline](https://medium.com/)
