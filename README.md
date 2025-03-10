@@ -58,10 +58,10 @@ Check out the result below
 ## Project Structure
 
 .
-├── models/ # Contains the bronze and silver transformation in Glue.
-├── files/ # Contains a sample file uploaded in S3 to trigger the Lambda.
-├── assets/ # Images.
-└── lambda.py # Lambda code to start the workflow.
+├── models/ # Contains the bronze and silver transformation in Glue
+├── files/ # Contains a sample file uploaded in S3 to trigger the Lambda
+├── assets/ # Images
+└── lambda.py # Lambda code to start the workflow
 
 ## For more details on configuration, read my Medium post:
 
