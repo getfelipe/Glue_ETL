@@ -57,7 +57,7 @@ Check out the result below
 
 ## Project Structure
 
-.
+Glue_ETL/
 ├── models/ # Contains the bronze and silver transformation in Glue
 ├── files/ # Contains a sample file uploaded in S3 to trigger the Lambda
 ├── assets/ # Images
