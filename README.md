@@ -55,6 +55,16 @@ Check out the result below
 
 ![grafana-dashboard](assets/finaldash.png)
 
+## Project Structure
+
+├── models/ # Where contains the bronze and silver transformation in Glue.
+│
+├── files/ # Contains a sample file uploaded in S3 to trigger the lambda.
+│
+├── assets/ # images
+|
+├── lambda.py/ # Lambda code to start the workflow.
+
 ## For more details on configuration, read my Medium post:
 
 Check out my Medium post: [AWS Glue, Athena, and Grafana: A Step-by-Step Guide to a Simple Data Pipeline](https://medium.com/)
@@ -63,3 +73,5 @@ Check out my Medium post: [AWS Glue, Athena, and Grafana: A Step-by-Step Guide t
 
 - **boto3**
 - **pandas**
+- **datetime**
+- **sys**
